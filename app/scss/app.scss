@@ -1,1 +1,10 @@
 @import "variables";
+
+@import "./base/reset.scss";
+@import "./base/type.scss";
+
+@import "./components/pomodoro.scss";
+@import "./components/timer.scss";
+@import "./components/settings.scss";
+@import "./components/slider.scss";
+@import "./components/toggle.scss";
