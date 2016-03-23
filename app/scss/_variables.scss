@@ -5,11 +5,3 @@ $timer-colors: (
 
 $settings-panel-color: #f0f3f6;
 $fontFamily: 'Open Sans', sans-serif !default;
-
-%clearfix {
-    &:after {
-        content: '';
-        display: table;
-        clear: both;
-    }
-}

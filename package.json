@@ -29,6 +29,7 @@
     "worker-loader": "^0.7.0"
   },
   "dependencies": {
+    "rc-slider": "^3.5.1",
     "react": "^0.14.7",
     "react-dom": "^0.14.7",
     "react-redux": "^4.4.1",

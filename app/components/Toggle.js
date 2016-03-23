@@ -4,7 +4,7 @@ const Toggle = ({
   label,
 }) => {
   return (
-    <div className="toggle__container {{klass}}">
+    <div className="toggle__container">
       <p className="toggle__label">{label}</p>
       <div className="toggle">
         <input type="checkbox" className="toggle__checkbox" checked={false} />
