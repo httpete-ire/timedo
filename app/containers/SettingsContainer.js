@@ -1,15 +1,29 @@
 import React from 'react';
-
 import Toggle from './../components/Toggle.js';
 import ReactSlider from 'react-slider';
+import { connect } from 'react-redux';
+import { toggleSettingsPanel } from './../actions/settings.js';
 
-const SettingsContainer = () => {
+let SettingsContainer = ({
+  toggleSettingsPanel,
+  settingsPanelOpen
+}) => {
+
+  let settingClassNames = 'settings__container';
+
+  // if settingsPanelOpen is true open panel
+  if (settingsPanelOpen) {
+    settingClassNames += ' is-open';
+  }
+
   return (
-    <div className="settings__container">
+    <div className={settingClassNames}>
+
+      <img src="http://httpete.com/assets/settings.svg" className="settings__trigger" onClick={toggleSettingsPanel} />
 
       <div className="settings__panel">
         <div className="settings__close">
-            <span>×</span>
+            <span onClick={toggleSettingsPanel}>×</span>
         </div>
 
         <Toggle label={'Desktop notifications'} />
@@ -55,5 +69,25 @@ const SettingsContainer = () => {
     </div>
   );
 };
+
+const mapStateToProps = (state, ownProps) => {
+  return {
+    settingsPanelOpen: state.settings.settingsPanelOpen,
+  };
+};
+
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return {
+    toggleSettingsPanel: () => {
+      dispatch(toggleSettingsPanel());
+    },
+  };
+};
+
+SettingsContainer = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(SettingsContainer);
 
 export default SettingsContainer;
