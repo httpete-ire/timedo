@@ -1,0 +1,53 @@
+@each $state, $color in $timer-colors {
+  .slider__#{$state} {
+    width: 80%;
+    padding: 15px 0;
+    float: left;
+  }
+
+  .slider__#{$state} .bar-0 {
+    background: $color;
+  }
+
+}
+
+.slider__container {
+  margin: 15px 0;
+}
+
+.bar {
+  position: relative;
+  border-radius: 10px;
+  height: 5px;
+}
+
+.bar-1 {
+ background: #ddd;
+}
+
+.handle {
+  line-height: 48px;
+  border: none;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  box-shadow: 0 0 0.125em #333;
+  background: #fff;
+  margin-top: -3px;
+  cursor: pointer;
+}
+
+.slider__value {
+  width: 20%;
+  text-align: center;
+  display: block;
+  float: left;
+  line-height: 30px;
+  color: #9d9d9d;
+  font-size: 0.875rem;
+}
+
+.slider__label {
+  font-size: 0.875rem;
+  color: #9d9d9d;
+}
