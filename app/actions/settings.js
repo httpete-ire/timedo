@@ -11,3 +11,10 @@ export const changeTime = (timerType, time) => {
     time,
   };
 };
+
+export const toggleNotification = (notificationType) => {
+  return {
+    type: 'TOGGLE_NOTIFICATION',
+    notificationType,
+  }
+}
