@@ -1,10 +1,6 @@
 const initalState = {
   settingsPanelOpen: false,
-  times: {
-    active: 25,
-    shortBreak: 3,
-    longBreak: 15
-  },
+  autoPlay: true,
   notifications: {
     desktop: false,
   }
@@ -17,14 +13,6 @@ const settings = (state = initalState, action) => {
         ...state,
         settingsPanelOpen: !state.settingsPanelOpen,
       };
-    case 'CHANGE_TIME':
-      return {
-        ...state,
-        times: {
-          ...state.times,
-          [action.timerType]: action.time
-        }
-      }
     case 'TOGGLE_NOTIFICATION':
       return {
         ...state,
