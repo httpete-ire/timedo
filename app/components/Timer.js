@@ -1,8 +1,11 @@
 import React from 'react';
+import { formatTime } from './../util/index.js';
 
-const Timer = () => {
+const Timer = ({
+  time,
+}) => {
   return (
-    <h1>25: 00</h1>
+    <h1>{formatTime(time)}</h1>
   )
 };
 
