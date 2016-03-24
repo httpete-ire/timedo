@@ -23,3 +23,9 @@ export const stopTimer = () => {
     type: 'STOP_TIMER',
   }
 };
+
+export const notified = () => {
+  return {
+    type: 'NOTIFIED',
+  };
+};

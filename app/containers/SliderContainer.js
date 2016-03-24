@@ -66,7 +66,7 @@ let SliderContainer = ({
 
 const mapStateToProps = (state) => {
   return {
-    times: state.settings.times,
+    times: state.timer.times,
   };
 };
 
