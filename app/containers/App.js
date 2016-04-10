@@ -2,6 +2,7 @@ import React from 'react';
 import TimerContainer from './TimerContainer.js';
 import SettingsContainer from './SettingsContainer.js';
 import Notifier from './Notifier.js';
+import Favicon from './Favicon.js';
 import classNames from 'classnames';
 import { connect } from 'react-redux';
 import TimerInfo from './../components/TimerInfo.js';
@@ -15,6 +16,10 @@ let App = ({
 
   return (
     <div className={pomodoroClassnames}>
+      <Favicon
+        activeicon="https://httpete.com/pomodoro/active.ico"
+        breakicon="https://httpete.com/pomodoro/break.ico"
+      />
       <Notifier />
       <TimerContainer />
       <SettingsContainer />
