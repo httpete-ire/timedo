@@ -22,6 +22,7 @@ class Notifer extends React.Component {
   }
 
   componentDidUpdate() {
+    console.log(this.props);
     if(this.props.notificationSet && this.props.notify) {
 
       let notification = new window.Notification('Pomodoro', notificationOptions(
@@ -48,7 +49,7 @@ class Notifer extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    notificationSet: state.settings.notifications.desktop,
+    notificationSet: state.settings.desktopNotification,
     notify: state.timer.notify,
     timerType: state.timer.timerType,
     currentTime: state.timer.currentTime,

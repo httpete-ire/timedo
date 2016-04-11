@@ -1,8 +1,10 @@
 const initalState = {
+  started: false,
   active: false,
   count: 0,
-  currentTime: 25,
+  currentTime: 5,
   timerType: 'active',
+  notify: false,
   times: {
     active: 25,
     shortBreak: 3,
@@ -20,7 +22,9 @@ const timer = (state = initalState, action) => {
     case 'START_TIMER':
       return {
         ...state,
+        started: true,
         active: true,
+        notify: false,
       };
     case 'STOP_TIMER':
       return {
@@ -33,15 +37,22 @@ const timer = (state = initalState, action) => {
         active: false,
         count: (action.timerType === 'break') ? state.count + 1 : state.count,
         timerType: action.timerType,
+        notify: true,
       };
     case 'CHANGE_TIME':
         return {
           ...state,
+          currentTime: (!state.started) ? action.time : state.currentTime,
           times: {
             ...state.times,
             [action.timerType]: action.time
           }
         }
+    case 'NOTIFIED':
+      return {
+        ...state,
+        notify: false,
+      }
     default:
       return state;
   }

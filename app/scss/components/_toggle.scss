@@ -45,6 +45,7 @@
     }
 
     &__container {
+      margin-bottom: 15px;
         @extend %clearfix;
 
         &--last {
@@ -79,5 +80,4 @@
 
 .toggle-container {
   border-bottom: 2px solid lighten(#ddd, 5%);
-  padding-bottom: 15px;
 }

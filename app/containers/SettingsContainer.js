@@ -12,7 +12,7 @@ let SettingsContainer = ({
   return (
     <div className={classNames('settings__container', {'is-open': settingsPanelOpen})}>
 
-      <img src="http://httpete.com/assets/settings.svg" className="settings__trigger" onClick={togglePanel} />
+      <img src="https://httpete.com/assets/settings.svg" className="settings__trigger" onClick={togglePanel} />
 
       <div className="settings__panel">
         <div className="settings__close">

@@ -1,9 +1,8 @@
 const initalState = {
   settingsPanelOpen: false,
   autoPlay: true,
-  notifications: {
-    desktop: false,
-  }
+  desktopNotification: false,
+  cleartodos: false,
 };
 
 const settings = (state = initalState, action) => {
@@ -13,13 +12,10 @@ const settings = (state = initalState, action) => {
         ...state,
         settingsPanelOpen: !state.settingsPanelOpen,
       };
-    case 'TOGGLE_NOTIFICATION':
+    case 'TOGGLE_SETTING':
       return {
         ...state,
-        notifications: {
-          ...state.notifications,
-          [action.notificationType]: !state.notifications[action.notificationType]
-        }
+        [action.settingType]: !state[action.settingType],
       }
     default:
       return state;

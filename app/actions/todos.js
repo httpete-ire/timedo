@@ -16,3 +16,9 @@ export const toggleTodo = (id) => {
     id
   }
 };
+
+export const clearCompletedTodos = () => {
+  return {
+    type: 'CLEAR_COMPLETED_TODOS',
+  }
+}

@@ -12,9 +12,9 @@ export const changeTime = (timerType, time) => {
   };
 };
 
-export const toggleNotification = (notificationType) => {
+export const toggleSetting = (settingType) => {
   return {
-    type: 'TOGGLE_NOTIFICATION',
-    notificationType,
+    type: 'TOGGLE_SETTING',
+    settingType,
   }
 }

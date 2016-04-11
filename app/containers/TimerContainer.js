@@ -3,6 +3,8 @@ import Timer from './../components/Timer.js';
 import TimerControls from './../components/TimerControls.js';
 import { connect } from 'react-redux';
 import { setTime, complete, stopTimer, startTimer } from './../actions/timer.js';
+import { clearCompletedTodos } from './../actions/todos.js';
+
 const TimerWorker = require("worker!./../util/TimerWorker.js");
 
 const SPACE_KEY = 32;
@@ -50,13 +52,16 @@ class TimerContainer extends React.Component {
     }
 
     let time = null;
-    if (this.props.timerType === 'break' && this.props.timerCount % 4 === 0) {
-      time = this.props.times.longBreak;
-    } else if (this.props.timerType === 'break') {
-      time = this.props.times.shortBreak;
+
+    if (this.props.timerType === 'break') {
+      time = (this.props.timerCount % 4 === 0) ? this.props.times.longBreak : this.props.times.shortBreak;
+      if(this.props.cleartodos) {
+        this.props.clearCompletedTodos();
+      }
     } else {
       time = this.props.times.active;
     }
+
     this.startTimer(time);
   }
 
@@ -104,6 +109,7 @@ const mapStateToProps = (state) => {
     autoplay: state.settings.autoPlay,
     timerCount: state.timer.count,
     times: state.timer.times,
+    cleartodos: state.settings.cleartodos,
   };
 };
 
@@ -120,6 +126,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     stopTimer: () => {
       dispatch(stopTimer());
+    },
+    clearCompletedTodos: () => {
+      dispatch(clearCompletedTodos())
     }
   };
 }

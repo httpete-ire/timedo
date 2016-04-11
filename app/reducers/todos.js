@@ -1,5 +1,6 @@
 const ADD_TODO = 'ADD_TODO';
 const TOGGLE_TODO = 'TOGGLE_TODO';
+const CLEAR_COMPLETED_TODOS = 'CLEAR_COMPLETED_TODOS';
 
 const todoReducer = (state, action) => {
   switch (action.type) {
@@ -18,8 +19,9 @@ const todoReducer = (state, action) => {
         ...state,
         completed: !state.completed
       };
-
       return obj;
+    case CLEAR_COMPLETED_TODOS:
+      return !state.completed;
     default:
       return state;
   }
@@ -42,17 +44,21 @@ const todos = (state = initalState, action) => {
       });
 
       // sort todos by completed property
-      todos.sort((todoA, todoB) => {
-        if(todoA.completed && !todoB.completed) {
-          return 1;
-        } else if (!todoA.completed && todoB.completed) {
-          return -1;
-        } else {
-          return 0;
-        }
-      });
+      // todos.sort((todoA, todoB) => {
+      //   if(todoA.completed && !todoB.completed) {
+      //     return 1;
+      //   } else if (!todoA.completed && todoB.completed) {
+      //     return -1;
+      //   } else {
+      //     return 0;
+      //   }
+      // });
 
       return todos;
+    case CLEAR_COMPLETED_TODOS:
+      return state.filter((todo) => {
+        return todoReducer(todo, action);
+      });
     default:
       return state;
   }
