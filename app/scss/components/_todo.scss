@@ -1,0 +1,90 @@
+.todo__container {
+  width: 290px;
+  height: 290px;
+  // background: white;
+  position: fixed;
+  top: 20px;
+  right: 20px;
+}
+
+.todo__input {
+  width: 100%;
+  height: 30px;
+  border: none;
+  outline: none;
+  background: inherit;
+  border-bottom: 1px solid $offwhite-text;
+  color: #fff;
+  font-size: 16px;
+}
+
+.todo__list {
+  max-height: 350px;
+  overflow-y: scroll;
+}
+
+.todo__item {
+  cursor: pointer;
+  position: relative;
+  padding: 13px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;       
+  user-select: none;
+}
+
+.todo__item:last-child {
+  border-bottom: none;
+}
+
+.todo__check {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 1px solid darken($offwhite-text, 5%);
+  display: inline-block;
+  margin-right: 10px;
+  position: relative;
+
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  // .is-complete &::before {
+  //   content: '';
+  //   // background: darken($offwhite-text, 5%);
+  //   width: 16px;
+  //   height: 16px;
+  //   border-radius: 50%;
+  //   display: inline-block;
+  // }
+
+  .is-complete &::after {
+    content: '';
+    background: url(https://httpete.com/check.svg) no-repeat center center;
+    background-size: 10px 10px;
+    width: 16px;
+    height: 16px;
+  }
+
+}
+
+.todo__text {
+  display: inline-block;
+  color: #fff;
+  position: relative;
+  top: -3px;
+
+  .is-complete & {
+    color: $offwhite-text;
+    text-decoration: line-through;
+  }
+
+}

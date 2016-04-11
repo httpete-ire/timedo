@@ -19,7 +19,7 @@ class TimerContainer extends React.Component {
     this.setWorkListeners();
 
     window.addEventListener('keydown', (e) => {
-      if (e.keyCode === SPACE_KEY) {
+      if (e.keyCode === SPACE_KEY && e.target.tagName !== 'INPUT') {
         (!this.props.activeTimer) ? this.startTimer(this.props.time) : this.stopTimer();
       }
     });

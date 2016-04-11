@@ -1,6 +1,7 @@
 import React from 'react';
 import TimerContainer from './TimerContainer.js';
 import SettingsContainer from './SettingsContainer.js';
+import TodoContainer from './TodoContainer.js';
 import Notifier from './Notifier.js';
 import Favicon from './Favicon.js';
 import classNames from 'classnames';
@@ -21,6 +22,7 @@ let App = ({
         breakicon="https://httpete.com/pomodoro/break.ico"
       />
       <Notifier />
+      <TodoContainer />
       <TimerContainer />
       <SettingsContainer />
       <TimerInfo count={pomodoroCount} />
