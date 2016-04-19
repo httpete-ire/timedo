@@ -22,3 +22,10 @@ export const clearCompletedTodos = () => {
     type: 'CLEAR_COMPLETED_TODOS',
   }
 }
+
+export const deleteTodo = (id) => {
+  return {
+    type: 'DELETE_TODO',
+    id
+  }
+};

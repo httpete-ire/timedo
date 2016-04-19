@@ -22,7 +22,6 @@ class Notifer extends React.Component {
   }
 
   componentDidUpdate() {
-    console.log(this.props);
     if(this.props.notificationSet && this.props.notify) {
 
       let notification = new window.Notification('Pomodoro', notificationOptions(

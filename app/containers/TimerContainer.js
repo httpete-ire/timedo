@@ -4,6 +4,7 @@ import TimerControls from './../components/TimerControls.js';
 import { connect } from 'react-redux';
 import { setTime, complete, stopTimer, startTimer } from './../actions/timer.js';
 import { clearCompletedTodos } from './../actions/todos.js';
+import { formatTime } from './../util/index.js';
 
 const TimerWorker = require("worker!./../util/TimerWorker.js");
 
@@ -17,6 +18,7 @@ class TimerContainer extends React.Component {
   }
 
   componentDidMount() {
+    document.title = formatTime(this.props.time);
     this.timerWorker = new TimerWorker();
     this.setWorkListeners();
 
@@ -26,6 +28,10 @@ class TimerContainer extends React.Component {
       }
     });
 
+  }
+
+  componentDidUpdate() {
+    document.title = formatTime(this.props.time);
   }
 
   setWorkListeners() {

@@ -5,12 +5,16 @@ const TodoItem = ({
   complete,
   text,
   click,
+  deleteTodo,
 }) => {
   return (
-    <li className={classNames('todo__item', {'is-complete': complete})} onClick={click}>
-      <div className="todo__check">
+    <li className={classNames('todo__item', {'is-complete': complete})}>
+      <div className="todo__item-container" onClick={click}>
+        <div className="todo__check">
+        </div>
+        <p className="todo__text">{text}</p>
       </div>
-      <p className="todo__text">{text}</p>
+      <span className="todo__delete" onClick={deleteTodo}>×</span>
     </li>
   );
 };

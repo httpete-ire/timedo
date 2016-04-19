@@ -20,6 +20,8 @@ const todoReducer = (state, action) => {
         completed: !state.completed
       };
       return obj;
+    case 'DELETE_TODO':
+      return (state.id !== action.id);
     case CLEAR_COMPLETED_TODOS:
       return !state.completed;
     default:
@@ -42,19 +44,11 @@ const todos = (state = initalState, action) => {
       let todos = state.map(todo => {
         return todoReducer(todo, action);
       });
-
-      // sort todos by completed property
-      // todos.sort((todoA, todoB) => {
-      //   if(todoA.completed && !todoB.completed) {
-      //     return 1;
-      //   } else if (!todoA.completed && todoB.completed) {
-      //     return -1;
-      //   } else {
-      //     return 0;
-      //   }
-      // });
-
       return todos;
+    case 'DELETE_TODO':
+      return  todos = state.filter(todo => {
+        return todoReducer(todo, action);
+      });
     case CLEAR_COMPLETED_TODOS:
       return state.filter((todo) => {
         return todoReducer(todo, action);

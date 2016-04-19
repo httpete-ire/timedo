@@ -3,7 +3,8 @@ import TodoItem from './TodoItem.js';
 
 const TodoList = ({
   todos,
-  todoClick
+  todoClick,
+  todoDelete,
 }) => {
   return (
     <div className="todo-list__container">
@@ -17,6 +18,9 @@ const TodoList = ({
               todoClick(todo.id);
               }
             }
+            deleteTodo={() => {
+              todoDelete(todo.id);
+            }}
             />;
         }
         )}
