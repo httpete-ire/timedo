@@ -1,0 +1,25 @@
+body {
+  font-family: $fontFamily;
+}
+
+h1 {
+  font-size: 72px;
+  font-size: 4.5rem;
+  color: #f0f3f6;
+}
+
+::-webkit-input-placeholder {
+   color: $offwhite-text;
+}
+
+:-moz-placeholder { /* Firefox 18- */
+   color: $offwhite-text;
+}
+
+::-moz-placeholder {  /* Firefox 19+ */
+   color: $offwhite-text;
+}
+
+:-ms-input-placeholder {
+   color: $offwhite-text;
+}

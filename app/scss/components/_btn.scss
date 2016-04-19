@@ -1,0 +1,21 @@
+%btn {
+    cursor: pointer;
+    padding: 7px 45px;
+    border: 2px solid $offwhite;
+    border-radius: 7px;
+    font-size: 18px;
+    background: none;
+}
+
+.btn {
+    @extend %btn;
+    color: $offwhite;
+}
+
+.timer__link {
+    color: $offwhite;
+    font-size: 12px;
+    cursor: pointer;
+    padding: 7px 45px;
+    text-decoration: underline;
+}

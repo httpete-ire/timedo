@@ -1,0 +1,27 @@
+.pomodoro__container {
+  height: 100vh;
+  width: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  background: red;
+}
+
+@each $state, $color in $timer-colors {
+  .pomodoro__container--#{$state} {
+    background: $color;
+  }
+}
+
+.pomodoro__count {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  color: $offwhite-text;
+  font-size: 14px;
+}
