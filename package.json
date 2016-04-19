@@ -1,5 +1,5 @@
 {
-  "name": "redux-pomodoro",
+  "name": "timedo",
   "version": "1.0.0",
   "description": "Pomodoro timer built in React using Redux to manage the application state",
   "main": "index.js",
