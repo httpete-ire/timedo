@@ -24,7 +24,6 @@
 }
 
 .todo__item {
-  cursor: pointer;
   position: relative;
   padding: 13px 0;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
@@ -32,7 +31,7 @@
   -webkit-user-select: none;
   -khtml-user-select: none;
   -moz-user-select: none;
-  -ms-user-select: none;       
+  -ms-user-select: none;
   user-select: none;
 }
 
@@ -87,4 +86,22 @@
     text-decoration: line-through;
   }
 
+}
+
+
+.todo__item-container {
+  display: inline-block;
+  cursor: pointer;
+  padding-right: 50px;
+}
+
+.todo__delete {
+  float: right;
+  color: $offwhite-text;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.todo__item:hover .todo__delete {
+  opacity: 1;
 }
