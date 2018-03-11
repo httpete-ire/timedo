@@ -4,36 +4,39 @@ import classNames from 'classnames';
 import { toggleSettingsPanel, changeTime } from './../actions/settings.js';
 import ToggleContainer from './ToggleContainer.js';
 import SliderContainer from './SliderContainer.js';
+import settingsIcon from './../SVG/settings.svg';
 
-let SettingsContainer = ({
-  togglePanel,
-  settingsPanelOpen,
-}) => {
+let SettingsContainer = ({ togglePanel, settingsPanelOpen }) => {
   return (
-    <div className={classNames('settings__container', {'is-open': settingsPanelOpen})}>
-
-      <img src="https://httpete.com/assets/settings.svg" className="settings__trigger" onClick={togglePanel} />
+    <div
+      className={classNames('settings__container', {
+        'is-open': settingsPanelOpen,
+      })}
+    >
+      <img
+        src={settingsIcon}
+        className="settings__trigger"
+        onClick={togglePanel}
+      />
 
       <div className="settings__panel">
         <div className="settings__close">
-            <span onClick={togglePanel}>×</span>
+          <span onClick={togglePanel}>×</span>
         </div>
         <ToggleContainer />
         <SliderContainer />
       </div>
-
     </div>
   );
 };
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     settingsPanelOpen: state.settings.settingsPanelOpen,
   };
 };
 
-
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
   return {
     togglePanel: () => {
       dispatch(toggleSettingsPanel());
@@ -41,9 +44,8 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-SettingsContainer = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(SettingsContainer);
+SettingsContainer = connect(mapStateToProps, mapDispatchToProps)(
+  SettingsContainer
+);
 
 export default SettingsContainer;

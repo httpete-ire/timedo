@@ -1,4 +1,5 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+
 const htmlConfig = new HtmlWebpackPlugin({
   template: __dirname + '/app/index.html',
   filename: 'index.html',
@@ -6,9 +7,7 @@ const htmlConfig = new HtmlWebpackPlugin({
 });
 
 module.exports = {
-  entry: [
-    './app/index.js',
-  ],
+  entry: ['./app/index.js'],
   output: {
     path: __dirname + '/dist',
     filename: 'index.bundle.js',
@@ -23,6 +22,10 @@ module.exports = {
       {
         test: /\.scss$/,
         loaders: ['style', 'css?sourceMap', 'sass?sourceMap'],
+      },
+      {
+        test: /\.svg$/,
+        loader: 'url-loader',
       },
     ],
   },
