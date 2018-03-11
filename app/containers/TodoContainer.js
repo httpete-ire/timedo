@@ -1,4 +1,5 @@
 import React from 'react';
+import { bindActionCreators } from 'redux';
 import AddTodo from './AddTodo.js';
 import TodoList from './../components/TodoList.js';
 import { connect } from 'react-redux';
@@ -19,15 +20,13 @@ const mapStateToProps = state => {
   };
 };
 
-const mapDispatchToProps = dispatch => {
-  return {
-    todoClick: id => {
-      dispatch(toggleTodo(id));
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(
+    {
+      toggleTodo,
+      deleteTodo,
     },
-    todoDelete: id => {
-      dispatch(deleteTodo(id));
-    },
-  };
-};
+    dispatch
+  );
 
 export default connect(mapStateToProps, mapDispatchToProps)(TodoContainer);

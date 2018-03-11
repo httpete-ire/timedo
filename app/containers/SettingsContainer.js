@@ -1,4 +1,5 @@
 import React from 'react';
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import classNames from 'classnames';
 import { toggleSettingsPanel, changeTime } from './../actions/settings.js';
@@ -36,13 +37,8 @@ const mapStateToProps = state => {
   };
 };
 
-const mapDispatchToProps = dispatch => {
-  return {
-    togglePanel: () => {
-      dispatch(toggleSettingsPanel());
-    },
-  };
-};
+const mapDispatchToProps = dispatch =>
+  bindActionCreators({ toggleSettingsPanel }, dispatch);
 
 SettingsContainer = connect(mapStateToProps, mapDispatchToProps)(
   SettingsContainer

@@ -1,12 +1,10 @@
 import React from 'react';
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import ReactSlider from 'rc-slider';
 import { changeTime } from './../actions/settings.js';
 
-let SliderContainer = ({
-  times,
-  changeTime,
-}) => {
+let SliderContainer = ({ times, changeTime }) => {
   return (
     <div className="slider-container">
       <div className="slider__container">
@@ -19,11 +17,11 @@ let SliderContainer = ({
           step={5}
           tipFormatter={null}
           value={times.active}
-          onChange={(value) => {
+          onChange={value => {
             changeTime('active', value);
           }}
         />
-      <span className="slider__value">{times.active}</span>
+        <span className="slider__value">{times.active}</span>
       </div>
 
       <div className="slider__container">
@@ -36,11 +34,11 @@ let SliderContainer = ({
           step={1}
           tipFormatter={null}
           value={times.shortBreak}
-          onChange={(value) => {
+          onChange={value => {
             changeTime('shortBreak', value);
           }}
         />
-      <span className="slider__value">{times.shortBreak}</span>
+        <span className="slider__value">{times.shortBreak}</span>
       </div>
 
       <div className="slider__container">
@@ -53,35 +51,30 @@ let SliderContainer = ({
           step={5}
           tipFormatter={null}
           value={times.longBreak}
-          onChange={(value) => {
+          onChange={value => {
             changeTime('longBreak', value);
           }}
         />
-      <span className="slider__value">{times.longBreak}</span>
+        <span className="slider__value">{times.longBreak}</span>
       </div>
-
     </div>
   );
 };
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     times: state.timer.times,
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    changeTime: (timerType, time) => {
-      dispatch(changeTime(timerType, time));
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(
+    {
+      changeTime,
     },
-  };
-};
+    dispatch
+  );
 
-SliderContainer = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(SliderContainer);
-
+SliderContainer = connect(mapStateToProps, mapDispatchToProps)(SliderContainer);
 
 export default SliderContainer;

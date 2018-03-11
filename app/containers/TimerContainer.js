@@ -1,4 +1,5 @@
 import React from 'react';
+import { bindActionCreators } from 'redux';
 import Timer from './../components/Timer.js';
 import TimerControls from './../components/TimerControls.js';
 import { connect } from 'react-redux';
@@ -131,28 +132,18 @@ const mapStateToProps = state => {
   };
 };
 
-const mapDispatchToProps = dispatch => {
-  return {
-    setTime: time => {
-      dispatch(setTime(time));
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(
+    {
+      setTime,
+      complete,
+      startTimer,
+      stopTimer,
+      clearCompletedTodos,
+      resetTimer,
     },
-    complete: timerType => {
-      dispatch(complete(timerType));
-    },
-    startTimer: () => {
-      dispatch(startTimer());
-    },
-    stopTimer: () => {
-      dispatch(stopTimer());
-    },
-    clearCompletedTodos: () => {
-      dispatch(clearCompletedTodos());
-    },
-    resetTimer: () => {
-      dispatch(resetTimer());
-    },
-  };
-};
+    dispatch
+  );
 
 TimerContainer = connect(mapStateToProps, mapDispatchToProps)(TimerContainer);
 export default TimerContainer;

@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import { notified } from './../actions/timer.js';
 
 const notificationOptions = (timerType, time) => {
@@ -13,29 +14,27 @@ const notificationOptions = (timerType, time) => {
     body: `Back to it`,
     icon: 'http://httpete.com/pomodoro/assets/active-clock.png',
   };
-}
+};
 
 class Notifer extends React.Component {
-
   constructor(props) {
     super(props);
   }
 
   componentDidUpdate() {
-    if(this.props.notificationSet && this.props.notify) {
-
-      let notification = new window.Notification('Pomodoro', notificationOptions(
-        this.props.timerType,
-        this.props.currentTime
-      ));
+    if (this.props.notificationSet && this.props.notify) {
+      let notification = new window.Notification(
+        'Pomodoro',
+        notificationOptions(this.props.timerType, this.props.currentTime)
+      );
 
       notification.onshow = () => {
         setTimeout(notification.close.bind(notification), 2500);
-      }
+      };
 
       notification.onclick = () => {
         notification.close();
-      }
+      };
 
       this.props.notified();
     }
@@ -46,7 +45,7 @@ class Notifer extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     notificationSet: state.settings.desktopNotification,
     notify: state.timer.notify,
@@ -55,13 +54,13 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    notified: () => {
-      dispatch(notified());
-    }
-  }
-}
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(
+    {
+      notified,
+    },
+    dispatch
+  );
 
 Notifer = connect(mapStateToProps, mapDispatchToProps)(Notifer);
 
