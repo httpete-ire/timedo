@@ -79,12 +79,12 @@ class TimerContainer extends React.Component {
     this.startTimer(time);
   }
 
-  stopTimer() {
+  stopTimer = () => {
     this.timerWorker.postMessage({
       command: 'STOP',
     });
     this.props.stopTimer();
-  }
+  };
 
   startTimer(time) {
     if (!this.props.activeTimer) {
