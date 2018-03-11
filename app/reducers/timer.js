@@ -58,6 +58,9 @@ const timer = (state = initalState, action) => {
         ...state,
         notify: false,
       };
+    case 'RESET': {
+      return initalState;
+    }
     default:
       return state;
   }

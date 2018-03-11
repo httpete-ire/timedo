@@ -7,6 +7,7 @@ import {
   complete,
   stopTimer,
   startTimer,
+  resetTimer,
 } from './../actions/timer.js';
 import { clearCompletedTodos } from './../actions/todos.js';
 import { formatTime } from './../util/index.js';
@@ -86,6 +87,11 @@ class TimerContainer extends React.Component {
     this.props.stopTimer();
   };
 
+  resetTimer = () => {
+    this.stopTimer();
+    this.props.resetTimer();
+  };
+
   startTimer(time) {
     if (!this.props.activeTimer) {
       this.timerWorker.postMessage({
@@ -106,7 +112,7 @@ class TimerContainer extends React.Component {
             this.startTimer(this.props.time);
           }}
           stop={this.stopTimer}
-          restart={() => {}}
+          reset={this.resetTimer}
         />
       </div>
     );
@@ -141,6 +147,9 @@ const mapDispatchToProps = dispatch => {
     },
     clearCompletedTodos: () => {
       dispatch(clearCompletedTodos());
+    },
+    resetTimer: () => {
+      dispatch(resetTimer());
     },
   };
 };
