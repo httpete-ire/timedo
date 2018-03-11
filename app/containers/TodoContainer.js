@@ -4,11 +4,7 @@ import TodoList from './../components/TodoList.js';
 import { connect } from 'react-redux';
 import { toggleTodo, deleteTodo } from './../actions/todos.js';
 
-const TodoContainer = ({
-  todos,
-  todoClick,
-  todoDelete,
-}) => {
+const TodoContainer = ({ todos, todoClick, todoDelete }) => {
   return (
     <div className="todo__container">
       <AddTodo />
@@ -17,26 +13,21 @@ const TodoContainer = ({
   );
 };
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
-    todos: state.todos
+    todos: state.todos,
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
   return {
-    todoClick: (id) => {
+    todoClick: id => {
       dispatch(toggleTodo(id));
     },
-    todoDelete: (id) => {
+    todoDelete: id => {
       dispatch(deleteTodo(id));
-    }
+    },
   };
 };
 
-export default TodoContainer;
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(TodoContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(TodoContainer);
