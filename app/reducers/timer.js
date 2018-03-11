@@ -1,8 +1,10 @@
+const MINUTES = 60;
+
 const initalState = {
   started: false,
   active: false,
   count: 0,
-  currentTime: 5,
+  currentTime: 25 * MINUTES,
   timerType: 'active',
   notify: false,
   times: {
@@ -44,7 +46,7 @@ const timer = (state = initalState, action) => {
         ...state,
         currentTime:
           !state.started && action.timerType === 'active'
-            ? action.time
+            ? action.time * MINUTES
             : state.currentTime,
         times: {
           ...state.times,

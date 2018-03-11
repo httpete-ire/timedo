@@ -2,16 +2,20 @@ import React from 'react';
 import Timer from './../components/Timer.js';
 import TimerControls from './../components/TimerControls.js';
 import { connect } from 'react-redux';
-import { setTime, complete, stopTimer, startTimer } from './../actions/timer.js';
+import {
+  setTime,
+  complete,
+  stopTimer,
+  startTimer,
+} from './../actions/timer.js';
 import { clearCompletedTodos } from './../actions/todos.js';
 import { formatTime } from './../util/index.js';
 
-const TimerWorker = require("worker!./../util/TimerWorker.js");
+const TimerWorker = require('worker!./../util/TimerWorker.js');
 
 const SPACE_KEY = 32;
 
 class TimerContainer extends React.Component {
-
   constructor(props) {
     super(props);
     this.timerWorker = null;
@@ -22,12 +26,13 @@ class TimerContainer extends React.Component {
     this.timerWorker = new TimerWorker();
     this.setWorkListeners();
 
-    window.addEventListener('keydown', (e) => {
+    window.addEventListener('keydown', e => {
       if (e.keyCode === SPACE_KEY && e.target.tagName !== 'INPUT') {
-        (!this.props.activeTimer) ? this.startTimer(this.props.time) : this.stopTimer();
+        !this.props.activeTimer
+          ? this.startTimer(this.props.time)
+          : this.stopTimer();
       }
     });
-
   }
 
   componentDidUpdate() {
@@ -35,14 +40,14 @@ class TimerContainer extends React.Component {
   }
 
   setWorkListeners() {
-    this.timerWorker.addEventListener('message', (e) => {
+    this.timerWorker.addEventListener('message', e => {
       switch (e.data.command) {
         case 'TICK':
-            this.props.setTime(e.data.time);
+          this.props.setTime(e.data.time);
           break;
         case 'COMPLETE':
-            this.completeTimer();
-            break;
+          this.completeTimer();
+          break;
         default:
           return false;
       }
@@ -51,17 +56,20 @@ class TimerContainer extends React.Component {
 
   completeTimer() {
     this.stopTimer();
-    this.props.complete((this.props.timerType === 'active') ? 'break' : 'active');
+    this.props.complete(this.props.timerType === 'active' ? 'break' : 'active');
 
-    if(!this.props.autoplay) {
+    if (!this.props.autoplay) {
       return;
     }
 
     let time = null;
 
     if (this.props.timerType === 'break') {
-      time = (this.props.timerCount % 4 === 0) ? this.props.times.longBreak : this.props.times.shortBreak;
-      if(this.props.cleartodos) {
+      time =
+        this.props.timerCount % 4 === 0
+          ? this.props.times.longBreak
+          : this.props.times.shortBreak;
+      if (this.props.cleartodos) {
         this.props.clearCompletedTodos();
       }
     } else {
@@ -79,10 +87,10 @@ class TimerContainer extends React.Component {
   }
 
   startTimer(time) {
-    if(!this.props.activeTimer) {
+    if (!this.props.activeTimer) {
       this.timerWorker.postMessage({
         command: 'START',
-        time,
+        time: time,
       });
       this.props.startTimer();
     }
@@ -97,17 +105,15 @@ class TimerContainer extends React.Component {
           start={() => {
             this.startTimer(this.props.time);
           }}
-          stop={() => {
-            this.stopTimer();
-          }}
+          stop={this.stopTimer}
           restart={() => {}}
         />
       </div>
-    )
+    );
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     time: state.timer.currentTime,
     timerType: state.timer.timerType,
@@ -119,12 +125,12 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
   return {
-    setTime: (time) => {
+    setTime: time => {
       dispatch(setTime(time));
     },
-    complete: (timerType) => {
+    complete: timerType => {
       dispatch(complete(timerType));
     },
     startTimer: () => {
@@ -134,10 +140,10 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(stopTimer());
     },
     clearCompletedTodos: () => {
-      dispatch(clearCompletedTodos())
-    }
+      dispatch(clearCompletedTodos());
+    },
   };
-}
+};
 
 TimerContainer = connect(mapStateToProps, mapDispatchToProps)(TimerContainer);
 export default TimerContainer;
