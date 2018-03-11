@@ -7,7 +7,7 @@ import ToggleContainer from './ToggleContainer.js';
 import SliderContainer from './SliderContainer.js';
 import settingsIcon from './../SVG/settings.svg';
 
-let SettingsContainer = ({ togglePanel, settingsPanelOpen }) => {
+let SettingsContainer = ({ toggleSettingsPanel, settingsPanelOpen }) => {
   return (
     <div
       className={classNames('settings__container', {
@@ -17,12 +17,12 @@ let SettingsContainer = ({ togglePanel, settingsPanelOpen }) => {
       <img
         src={settingsIcon}
         className="settings__trigger"
-        onClick={togglePanel}
+        onClick={toggleSettingsPanel}
       />
 
       <div className="settings__panel">
         <div className="settings__close">
-          <span onClick={togglePanel}>×</span>
+          <span onClick={toggleSettingsPanel}>×</span>
         </div>
         <ToggleContainer />
         <SliderContainer />
