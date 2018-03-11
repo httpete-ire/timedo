@@ -5,8 +5,9 @@
     "Pomodoro timer built in React using Redux to manage the application state",
   "main": "index.js",
   "scripts": {
-    "build": "webpack -p",
-    "start": "webpack-dev-server --inline"
+    "build": "webpack",
+    "dev": "webpack-dev-server --inline",
+    "start": "./node_modules/.bin/http-server ./dist"
   },
   "author": "Pete Redmond <pete@httpete.com> (http://httpete.com)",
   "license": "MIT",
