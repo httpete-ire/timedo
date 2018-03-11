@@ -8,8 +8,8 @@ const initalState = {
   times: {
     active: 25,
     shortBreak: 3,
-    longBreak: 15
-  }
+    longBreak: 15,
+  },
 };
 
 const timer = (state = initalState, action) => {
@@ -35,24 +35,27 @@ const timer = (state = initalState, action) => {
       return {
         ...state,
         active: false,
-        count: (action.timerType === 'break') ? state.count + 1 : state.count,
+        count: action.timerType === 'break' ? state.count + 1 : state.count,
         timerType: action.timerType,
         notify: true,
       };
     case 'CHANGE_TIME':
-        return {
-          ...state,
-          currentTime: (!state.started) ? action.time : state.currentTime,
-          times: {
-            ...state.times,
-            [action.timerType]: action.time
-          }
-        }
+      return {
+        ...state,
+        currentTime:
+          !state.started && action.timerType === 'active'
+            ? action.time
+            : state.currentTime,
+        times: {
+          ...state.times,
+          [action.timerType]: action.time,
+        },
+      };
     case 'NOTIFIED':
       return {
         ...state,
         notify: false,
-      }
+      };
     default:
       return state;
   }
