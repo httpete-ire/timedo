@@ -3,34 +3,51 @@ import { connect } from 'react-redux';
 import { addTodo } from './../actions/todos.js';
 import { bindActionCreators } from 'redux';
 
-let AddTodo = ({ addTodo }) => {
-  let input;
+class AddTodo extends React.Component {
+  constructor(props) {
+    super(props);
 
-  return (
-    <form
-      onSubmit={e => {
-        e.preventDefault();
-        let val = input.value.trim();
+    this.state = {
+      inputValue: '',
+    };
+  }
 
-        if (!val) {
-          return;
-        }
+  handleChange = e => {
+    this.setState({
+      inputValue: e.target.value,
+    });
+  };
 
-        addTodo(val);
-        input.value = '';
-      }}
-    >
-      <input
-        type="text"
-        className="todo__input"
-        placeholder="Enter todo"
-        ref={node => {
-          input = node;
-        }}
-      />
-    </form>
-  );
-};
+  submitForm = e => {
+    e.preventDefault();
+    const { addTodo } = this.props;
+    let val = this.state.inputValue.trim();
+
+    if (!val) {
+      return;
+    }
+
+    addTodo(val);
+
+    this.setState({
+      inputValue: '',
+    });
+  };
+
+  render() {
+    return (
+      <form onSubmit={this.submitForm}>
+        <input
+          type="text"
+          className="todo__input"
+          placeholder="Enter todo"
+          value={this.state.inputValue}
+          onChange={this.handleChange}
+        />
+      </form>
+    );
+  }
+}
 
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
@@ -40,6 +57,7 @@ const mapDispatchToProps = dispatch =>
     dispatch
   );
 
-AddTodo = connect(null, mapDispatchToProps)(AddTodo);
-
-export default AddTodo;
+export default connect(
+  null,
+  mapDispatchToProps
+)(AddTodo);
