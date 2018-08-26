@@ -24,7 +24,7 @@ class TimerContainer extends React.Component {
   }
 
   componentDidMount() {
-    document.title = formatTime(this.props.time);
+    document.title = formatTime(this.props.time * 60);
     this.timerWorker = new TimerWorker();
     this.setWorkListeners();
 
@@ -38,14 +38,14 @@ class TimerContainer extends React.Component {
   }
 
   componentDidUpdate() {
-    document.title = formatTime(this.props.time);
+    document.title = formatTime(this.props.time * 60);
   }
 
   setWorkListeners() {
     this.timerWorker.addEventListener('message', e => {
       switch (e.data.command) {
         case 'TICK':
-          this.props.setTime(e.data.time);
+          this.props.setTime(e.data.time / 60);
           break;
         case 'COMPLETE':
           this.completeTimer();
@@ -94,10 +94,12 @@ class TimerContainer extends React.Component {
   };
 
   startTimer(time) {
+    console.log(time);
+
     if (!this.props.activeTimer) {
       this.timerWorker.postMessage({
         command: 'START',
-        time: time,
+        time: time * 60,
       });
       this.props.startTimer();
     }
@@ -145,5 +147,8 @@ const mapDispatchToProps = dispatch =>
     dispatch
   );
 
-TimerContainer = connect(mapStateToProps, mapDispatchToProps)(TimerContainer);
+TimerContainer = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(TimerContainer);
 export default TimerContainer;
