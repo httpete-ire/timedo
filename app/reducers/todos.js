@@ -17,11 +17,11 @@ const todoReducer = (state, action) => {
 
       let obj = {
         ...state,
-        completed: !state.completed
+        completed: !state.completed,
       };
       return obj;
     case 'DELETE_TODO':
-      return (state.id !== action.id);
+      return state.id !== action.id;
     case CLEAR_COMPLETED_TODOS:
       return !state.completed;
     default:
@@ -36,21 +36,18 @@ const initalState = [];
 const todos = (state = initalState, action) => {
   switch (action.type) {
     case ADD_TODO:
-      return [
-        ...state,
-        todoReducer(null, action)
-      ];
+      return [todoReducer(null, action), ...state];
     case TOGGLE_TODO:
       let todos = state.map(todo => {
         return todoReducer(todo, action);
       });
       return todos;
     case 'DELETE_TODO':
-      return  todos = state.filter(todo => {
+      return (todos = state.filter(todo => {
         return todoReducer(todo, action);
-      });
+      }));
     case CLEAR_COMPLETED_TODOS:
-      return state.filter((todo) => {
+      return state.filter(todo => {
         return todoReducer(todo, action);
       });
     default:
