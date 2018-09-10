@@ -40,8 +40,9 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch =>
   bindActionCreators({ toggleSettingsPanel }, dispatch);
 
-SettingsContainer = connect(mapStateToProps, mapDispatchToProps)(
-  SettingsContainer
-);
+SettingsContainer = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(SettingsContainer);
 
 export default SettingsContainer;

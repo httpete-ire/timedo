@@ -13,6 +13,7 @@ let ToggleContainer = ({ toggleSetting, desktopNotification }) => {
         onToggle={() => {
           // only toggle notifications if the user gives the
           // correct permission
+
           Notification.requestPermission(permission => {
             if (permission === 'granted') {
               toggleSetting('desktopNotification');
@@ -32,7 +33,7 @@ let ToggleContainer = ({ toggleSetting, desktopNotification }) => {
 
 const mapsStateToProps = state => {
   return {
-    desktopNotification: state.desktopNotification,
+    desktopNotification: state.settings.desktopNotification,
   };
 };
 
@@ -44,8 +45,7 @@ const mapDispatchToProps = dispatch =>
     dispatch
   );
 
-ToggleContainer = connect(mapsStateToProps, mapDispatchToProps)(
-  ToggleContainer
-);
-
-export default ToggleContainer;
+export default connect(
+  mapsStateToProps,
+  mapDispatchToProps
+)(ToggleContainer);
