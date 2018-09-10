@@ -6,7 +6,7 @@
   "scripts": {
     "build": "webpack",
     "dev": "webpack-dev-server --inline",
-    "start": "npm run build && ./node_modules/.bin/http-server ./dist"
+    "start": "./node_modules/.bin/http-server ./dist"
   },
   "author": "Pete Redmond <pete@httpete.com> (http://httpete.com)",
   "license": "MIT",
